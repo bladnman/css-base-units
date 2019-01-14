@@ -7,7 +7,7 @@ import styles from './App.module.css';
 
 class App extends Component {
   render() {
-    const items = ('a,'.repeat(30)).split(',');
+    const items = ('World,'.repeat(30)).split(',');
     return (
       <div className={styles.App}>
         <Grid className={styles.grid}>

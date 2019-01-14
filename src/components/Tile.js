@@ -5,7 +5,7 @@ export default class Tile extends Component {
   render() {
     return (
       <div className={[this.props.className, styles.base].join(' ')}>
-        hello there world
+        {this.props.children}
       </div>
     )
   }
