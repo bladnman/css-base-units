@@ -1,10 +1,13 @@
 .App {}
 .grid {}
 .tile {
-  transition: all 100ms;
-  border-radius: 50%;
+  transition            : all 100ms;
+  border-radius         : 50%;
 }
 .tile:hover {
-  background-color: #00000022;
-  border-radius: 0;
+  background-color      : #00000022;
+  border-radius         : 0;
+}
+.label {
+  font-size             : 1.2em;
 }

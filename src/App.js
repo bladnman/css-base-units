@@ -12,7 +12,13 @@ class App extends Component {
       <div className={styles.App}>
         <Grid className={styles.grid}>
           {items.map( (item, idx) => {
-            return <Tile key={idx} className={styles.tile}>{item}</Tile>
+            return (
+              <Tile key={idx} className={styles.tile}>
+              
+                <div className={styles.label}>{item}</div>
+                
+              </Tile>
+            );
           })}
         </Grid>
       </div>
