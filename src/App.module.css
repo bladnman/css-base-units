@@ -1,41 +1,13 @@
 .App {}
-.grid {}
-.tile {
-  transition      : all 2500ms;
-  border-radius   : 0.5em;
-  &:hover {
-    color                   : yellow;
-    border-radius           : 50%;
-    transform               : rotate(16deg);
-    transition-duration     : 10ms;
-    border-color            : yellow;
-    & .label {
-      color       : lighten(green, 0.6);
-    }
-  }
-  &:active {
-    transform     : rotate(7deg);
-    border-color  : yellow;
-
-    & .label {
-      color       : yellow;
-    }
-  }
+.toolbar {
+  padding             : 0.5em 0;
 }
-.selected {
-  background      : green;
-  border-top-color      : #ffffff6e;
-  border-left-color     : #ffffff6e;
-  border-bottom-color   : #0000006e;
-  border-right-color    : #0000006e;
-
-  border-top-style      :solid;
-  border-left-style     :solid;
-  border-bottom-style   :solid;
-  border-right-style    :solid;
+.toolbarTitle {
+  font-weight         : bold;
 }
-.label {
-  font-size       : lu_px(1);
-  color           : green;
-  transition      : all 200ms;
+.toolbarLink {
+  color               : white;
+  margin              : 0 0.5em;
+  text-decoration     : underline;
+  cursor              : pointer;
 }

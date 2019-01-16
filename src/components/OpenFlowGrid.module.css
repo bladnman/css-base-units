@@ -1,0 +1,30 @@
+.App {}
+.grid {}
+
+.tile {
+  transition              : all 300ms;
+  border-radius           : 0.5em;
+}
+.tile:hover {
+  color                   : yellow;
+  border-radius           : 50%;
+  transform               : rotate(16deg);
+  transition-duration     : 10ms;
+  border-color            : yellow;
+}
+.tile:active {
+  transform               : rotate(27deg);
+  border-color            : yellow;
+}
+.tile.selected {
+  background              : green;
+  border-top-color        : #ffffff6e;
+  border-left-color       : #ffffff6e;
+  border-bottom-color     : #0000006e;
+  border-right-color      : #0000006e;
+
+  border-top-style        : solid;
+  border-left-style       : solid;
+  border-bottom-style     : solid;
+  border-right-style      : solid;
+}
