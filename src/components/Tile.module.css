@@ -2,10 +2,14 @@
   display               : flex;
   align-items           : center;
   justify-content       : center;
-  background-color      : rgba(255, 255, 255, 0.05);
+  background-color      : rgba(255,255,255, 0.01);
+  /* box-sizing: border-box; */
 
-  border                : 0.05em solid rgba(255, 255, 255, 0.1);
-  width                 : 10em;
-  height                : 10em;
-  margin                : 1em;
+  border-width          : lu_px(0.3);
+  border-color          : rgba(255, 255, 0, 0);
+  border-style          : dotted;
+
+  width                 : lu_px(4);
+  height                : lu_px(4);
+  margin                : lu_px(0.2);
 }

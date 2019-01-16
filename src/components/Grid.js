@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom';
 
 import styles from './Grid.module.css';
 export default class Grid extends Component {
@@ -17,13 +18,23 @@ export default class Grid extends Component {
     }
   }
   getScrollSize() {
-    const scrollSize = 50; // todo: MAKE THIS DYNAMIC
+    const firstChildElem = this.refs && ReactDOM.findDOMNode(this.refs[0]);
+    if (!firstChildElem) {
+      return 0;
+    }
+    const style       = document.defaultView.getComputedStyle(firstChildElem, '');
+    const scrollSize  = parseInt(style.getPropertyValue('height')) + 
+                        parseInt(style.getPropertyValue('border-width')) + 
+                        parseInt(style.getPropertyValue('margin-bottom'));
+    // const scrollSize  = parseInt(style.getPropertyValue('height'));
     return scrollSize;
   }
   render() {
     return (
       <div className={[this.props.className, styles.base].join(' ')}>
-        {this.props.children}
+        {React.Children.map(this.props.children, (element, idx) => {
+          return React.cloneElement(element, { ref: idx });
+        })}
       </div>
     )
   }
