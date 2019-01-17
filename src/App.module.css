@@ -4,6 +4,7 @@
 }
 .toolbarTitle {
   font-weight         : bold;
+  margin-left         : 1em;
 }
 .toolbarLink {
   color               : white;

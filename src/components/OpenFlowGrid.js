@@ -1,35 +1,48 @@
 import React, { Component } from 'react'
-
-import Grid from './Grid'
 import Tile from './Tile'
-
 import styles from './OpenFlowGrid.module.css';
 
 export default class OpenFlowGrid extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected : {},
+      selected      : {},
+      isMouseDown   : false,
+      isEraser      : false,
     };
   }
   static defaultProps = {
-    cellCount : 900,
+    cellCount     : 400,
+    isFixed       : false,
+    fixedColumns  : 20,
+    fixedRows     : 20,
   }
   handlePress = (idx) => {
+    
     if (this.state.selected[idx]) {
       this.deselect(idx);
+      this.setState({isEraser:true});
     }
     else {
       this.select(idx);
+      this.setState({isEraser:false});
     }
+
+    this.setState({isMouseDown : true});
+
   }
   handleMouseEnter = (ev, idx) => {
     if (this.state.isMouseDown) {
-      this.select(idx);
+
+      // erase
+      if (this.state.isEraser) {
+        this.deselect(idx);
+      }
+
+      else {
+        this.select(idx);
+      }
     }
-  }
-  handleMouseDown = () => {
-    this.setState({isMouseDown : true});
   }
   handleMouseUp = () => {
     this.setState({isMouseDown : false});
@@ -49,15 +62,26 @@ export default class OpenFlowGrid extends Component {
     }
   }
   render() {
-    const items = (','.repeat(this.props.cellCount)).split(',');
 
     return (
       <div  className={styles.App} 
-            onMouseDown={this.handleMouseDown}
             onMouseUp={this.handleMouseUp}
             style={{'--lum':this.props.lum}}>
+        
+        {this.props.isFixed
+          ? this.renderFixed()
+          : this.renderFlow()
+        }
 
-        <Grid className={styles.grid}>
+      </div>
+    )
+
+  }
+  renderFlow() {
+    const items = (','.repeat(this.props.cellCount)).split(',');
+
+    return (
+        <div className={[styles.grid, styles.gridFlow].join(' ')}>
           {items.map( (item, idx) => {
 
             const classes = [styles.tile];
@@ -72,7 +96,36 @@ export default class OpenFlowGrid extends Component {
                     onMouseEnter={(ev)=>this.handleMouseEnter(ev, idx)} />
             );
           })}
-        </Grid>
+        </div>
+    )
+  }
+  renderFixed() {
+    const rows      = (new Array(this.props.fixedRows)).fill(1);
+    const columns   = (new Array(this.props.fixedColumns)).fill(1);
+    return (
+      <div className={[styles.grid, styles.gridFixed].join(' ')}>
+        {/* ROWS */}
+        {rows.map((item, rowIdx) => 
+          <div key={rowIdx} className={styles.row}>
+
+            {/* COLUMNS */}
+            {columns.map((item, colIdx) => {
+              const itemIdx = (rowIdx * (this.props.fixedColumns)) + colIdx;
+              const classes = [styles.tile, styles.fixedTile];
+              if (this.state.selected[itemIdx]) {
+                classes.push(styles.selected);
+              }
+
+              // TILE
+              return (
+                <Tile key={itemIdx} 
+                      className={classes.join(' ')} 
+                      onMouseDown={()=>this.handlePress(itemIdx)}
+                      onMouseEnter={(ev)=>this.handleMouseEnter(ev, itemIdx)} />
+              )
+            })}
+          </div>
+        )}
       </div>
     )
   }
