@@ -13,20 +13,35 @@ class App extends Component {
       fixedRows : 20,
     }
   }
+  static defaultProps = {
+    lumStepAmt : 0.25,
+    lumMax : 5,
+    lumMin : 0.25,
+  }
   setLum = (lum) => {
     this.setState({lum});
   }
   render() {
+    const { lum } = this.state;
+    const { lumStepAmt, lumMax, lumMin } = this.props;
+
     return (
       <div>
         <div className={styles.toolbar}>
-          <span className={styles.toolbarTitle}>LUM:</span>
-          <span className={styles.toolbarLink} onClick={() => this.setLum()}>(empty)</span>
-          <span className={styles.toolbarLink} onClick={() => this.setLum(0.5)}>0.5</span>
-          <span className={styles.toolbarLink} onClick={() => this.setLum(1.0)}>1.0</span>
-          <span className={styles.toolbarLink} onClick={() => this.setLum(1.5)}>1.5</span>
-          <span className={styles.toolbarLink} onClick={() => this.setLum(2.0)}>2.0</span>
-          <span className={styles.toolbarLink} onClick={() => this.setLum(3.0)}>3.0</span>
+          <div className={styles.toolbarSection}>
+            <span className={styles.toolbarTitle}>LUM:</span>
+            <span className={[styles.toolbarStepButton, 
+                              styles.toolbarStepButtonDown,
+                              lum <= lumMin ? styles.toolbarButtonDisabled : ''].join(' ')}
+                  onClick={() => this.setState({lum : Math.max(lumMin, lum - lumStepAmt)})}>-</span>
+
+            <span className={[styles.toolbarLabel, styles.lumLabel].join(' ')}>{lum}</span>   
+            <span className={[styles.toolbarStepButton, 
+                              styles.toolbarStepButtonUp,
+                              lum >= lumMax ? styles.toolbarButtonDisabled : ''].join(' ')}
+                  onClick={() => this.setState({lum : Math.min(lumMax, lum + lumStepAmt)})}>+</span>
+       
+          </div>
 
           <span className={styles.toolbarTitle}>GRID:</span>
           <span className={styles.toolbarLink} onClick={() => this.setState({isFixed:true})}>fixed</span>
