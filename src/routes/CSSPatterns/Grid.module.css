@@ -1,0 +1,10 @@
+.root {
+  margin :  lu_px(5) 0;
+}
+.grid {
+  
+}
+.title {
+  font-size     : $text.title_section;
+  font-weight   : bold;
+}

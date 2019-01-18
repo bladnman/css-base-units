@@ -1,4 +1,6 @@
-
+*:focus {
+  outline: none;
+}
 body {
   --bu : 10;
 
