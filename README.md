@@ -1,3 +1,10 @@
+This is a test project that investigated allowing me to use css variables
+to describe `bu` or _base units_ for the UI. This creates something 
+similar to `font-size` and using `em` logic throughout the UI without
+affecting anything else.
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
